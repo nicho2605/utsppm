@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+ <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+ <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+ <script type="text/javascript">
+ 	$( document ).on( "pageinit", "body", function( event ) {
+  alert( "Selamat Datang di Koperasi" );
+});
+ 	$( window ).on( "orientationchange", function( event ) {
+  $( "#orientation" ).text( "This device is in " + event.orientation + " mode!" );
+});
+ 	$(document).ready(function(){
+ 		var co = 0;
+	 	$("#btn1").click(function(){
+	 		co+=1;
+	 		pinjaman = document.getElementById("pinjaman").value;
+	 		pin = parseInt(pinjaman)
+	 		lama = document.getElementById("lamapinjaman").value;
+	 		lam = parseInt(lama)
+	 		if(lam<7){
+	 			total=pin + pin*2*lam/100;
+	 			alert(total);
+	 		}else if(lam<13){
+	 			total = pin + pin*1.5*lam/100;
+	 		}else if(lam>12){
+	 			total = pin + pin*lam/100;
+	 		}
+	 		$("#showa").empty();
+	 		$("#showa").append("Pinjaman Terakhir : <br>");
+	 		$("#showa").append("Pinjaman : " + pinjaman + ", lama pinjaman : " + lama + " bulan<br>Total pinjaman  : " + total); 
+
+	 		$("#spacekosong").append("<h3>Pinjaman ke-" + co + "</h3><ul style='list-style-type:disc;''>");
+	 		var bul = total/lam;
+	 		bul = bul.toFixed(2);
+	 		for(var i = 0;i<lam;i++){
+	 			$("#spacekosong").append("<li>Pinjaman bulan ke-" + i + " = " + bul + "</li>");
+	 		}
+	 		$("#spacekosong").append("</ul><br>");
+	 	});
+	});
+ </script>
+ <style type="text/css">
+ 	#spacekosong{
+ 		margin-left: 50px;
+ 	}
+ </style>
+<body>
+<div data-role="page" id="page1">
+
+	<div data-role="header">
+		<h1>Input Pinjaman</h1>
+	</div>
+	<div data-role="navbar">
+    <ul>
+        <li><a href="#page1" class="ui-btn-active">Input Pinjaman</a></li>
+        <li><a href="#page2">Detail Pinjaman</a></li>
+    </ul>
+	</div>
+
+	<div role="main" class="ui-content">
+		<h2>Input Pinjaman</h2>
+		<label for="text-basic">Jumlah Pinjaman :</label>
+		<input type="text" name="text-basic" id="pinjaman" value="">
+		<label for="slider-fill">Lama Waktu Pinjaman 	(bulan) :</label>
+		<input type="range" name="slider-fill" id="lamapinjaman" value="1" min="1" max="60" step="1" data-highlight="true">
+		<button class="ui-shadow ui-btn ui-corner-all" id="btn1">Submit Pinjaman</button>
+		<p id="showa"></p>
+		<!-- <p><a href="#page2">Detail Pinjaman</a></p> -->
+	</div><!-- /content -->
+	<div data-role="footer">
+		<p id="orientation"></p>
+		<h1>c14180046 - Gregorius Nicholas Goenawan</h1>
+	</div>
+</div><!-- /page -->
+
+<!-- Start of second page -->
+<div data-role="page" id="page2">
+	<div data-role="header">
+		<h1>Detail Pinjaman :</h1>
+	</div>
+	<div data-role="navbar">
+    <ul>
+        <li><a href="#page1">Input Pinjaman</a></li>
+        <li><a href="#page2" class="ui-btn-active">Detail Pinjaman</a></li>
+    </ul>
+    </ul>
+	</div>
+	<div role="main" class="ui-content">
+		<h2>Daftar pinjaman yang telah dipinjam : </h2>
+		<div id ="spacekosong"></div>
+		<!-- <p><a href="#page1">Back to Home</a></p> -->
+	</div><!-- /content -->
+	<div data-role="footer">
+		<h1>c14180046 - Gregorius Nicholas Goenawan</h1>
+	</div>
+</div><!-- /page -->
+</body>
+</html>
